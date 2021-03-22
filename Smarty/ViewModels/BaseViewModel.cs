@@ -11,6 +11,7 @@ namespace Smarty.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IHttpClient RestClient => DependencyService.Get<IHttpClient>();
 
         bool isBusy = false;
         public bool IsBusy
