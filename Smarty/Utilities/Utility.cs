@@ -23,6 +23,19 @@ namespace Smarty.Utilities
         }
     }
 
+    public class DoubleToEuroStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return $"{(decimal)value:N2} €";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return $"{(decimal)value:N2} €";
+        }
+    }
+
     public class Utility
     {
         public async static Task<T> DeserializeObjectFromHttpResponse<T>(HttpResponseMessage response) where T : new()
