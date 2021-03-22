@@ -15,7 +15,7 @@ namespace Smarty
         {
             InitializeComponent();
             
-            DependencyService.Register<MockDataStore>();
+            // Dependency Injection
             DependencyService.RegisterSingleton(new RestClient());
 
             MainPage = new AppShell();

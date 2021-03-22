@@ -8,10 +8,9 @@ namespace Smarty.Services
 {
     public interface IHttpClient
     {
-        HttpClient GetClient();
+        HttpClient GetClient();        
         Task<HttpResponseMessage> PostJsonAsync(string requestUrl, object bodyContent);
-        Task<HttpResponseMessage> Get(string requestUrl);
-        void SetOauthToken(string token);
-        string GetToken();
+        Task<HttpResponseMessage> GetAsync(string requestUrl);
+        void SetOauthToken(string token);        
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Smarty
+namespace Smarty.Models
 {
     public class UserCredentials
     {

@@ -4,11 +4,54 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             xmlns:utilities="clr-namespace:Smarty.Utilities"
              x:Class="Smarty.Views.LoginPage"
              Shell.NavBarIsVisible="False">
+    <ContentPage.Resources>
+        <utilities:NegateBooleanConverter x:Key="negate"/>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+            <Label Text="Inserisci le tue credenziali" HorizontalTextAlignment="Center" FontSize="Large"></Label>
+            <Frame>
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"></ColumnDefinition>
+                            <ColumnDefinition Width="80*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Scale="0.5">
+                            <Image.Source>
+                                <FontImageSource FontFamily="fa"
+                             Color="Black"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"/>
+                            </Image.Source>
+                        </Image>
+                        <Entry IsPassword="False" Grid.Row="0" Grid.Column="1" Text="{Binding Username}"></Entry>
+                        <Image Grid.Row="1" Grid.Column="0" Scale="0.5">
+                            <Image.Source>
+                                <FontImageSource FontFamily="fa"
+                             Color="Black"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Key}"/>
+                            </Image.Source>
+                        </Image>
+                        <Entry IsPassword="True" Grid.Row="1" Grid.Column="1" Text="{Binding Password}"></Entry>
+                    </Grid>
+                    <ActivityIndicator x:Name="loaderLogin" IsRunning="true" IsVisible="{Binding IsLoginButtonVisibile, Converter={StaticResource negate}}" />
+                    <Button x:Name="btnLogin" class="btn-primary" Margin="0,0,0,0" VerticalOptions="Center" Text="Login" IsVisible="{Binding IsLoginButtonVisibile}" Command="{Binding LoginCommand}"/>
+                    <StackLayout Margin="0,20,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"></ColumnDefinition>
+                                <ColumnDefinition Width="50*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="..non hai ancora un account?" HorizontalTextAlignment="Center" FontSize="Caption"></Label>
+                            <Button Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Registrati" class="btn-secondary" Command="{Binding LoginCommand}"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

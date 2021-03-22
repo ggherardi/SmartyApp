@@ -9,20 +9,33 @@ namespace Smarty.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public Command LoginCommand { get; }
+        private string _username;
+        private string _password;
+        private bool _isLoginButtonVisibile;
+        public string Username { get => _username; set => SetProperty(ref _username, value); }
+        public string Password { get => _password; set => SetProperty(ref _password, value); }
+        public bool IsLoginButtonVisibile { get => _isLoginButtonVisibile; set => SetProperty(ref _isLoginButtonVisibile, value); }
+
+        public Command LoginCommand => new Command(OnLoginClicked);
 
         public LoginViewModel()
-        {            
-            LoginCommand = new Command(OnLoginClicked);
-        }
-
-        private async void OnLoginClicked(object obj)
         {
-            HttpResponseMessage response = await RestClient.PostJsonAsync("http://10.0.2.2:5000/api/smartticket", new UserCredentials() { Username = "ggherardi", Password = "gg" });
-            string token = await response.Content.ReadAsStringAsync();
-            RestClient.SetOauthToken(token);
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            IsLoginButtonVisibile = true;
+        }        
+
+        public async void OnLoginClicked(object obj)
+        {
+            IsLoginButtonVisibile = false;
+            bool authtenticated = await AuthenticateUser(_username, _password);
+            if (authtenticated)
+            {
+                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                await Shell.Current.GoToAsync($"//{nameof(TicketPage)}");
+            }
+            else
+            {
+                IsLoginButtonVisibile = true;
+            }
         }
     }
 }

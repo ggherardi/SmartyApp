@@ -3,14 +3,15 @@ using Smarty.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Smarty.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public IHttpClient RestClient => DependencyService.Get<IHttpClient>();
 
         bool isBusy = false;
@@ -38,6 +39,19 @@ namespace Smarty.ViewModels
             onChanged?.Invoke();
             OnPropertyChanged(propertyName);
             return true;
+        }
+
+        protected async Task<bool> AuthenticateUser(string username, string password)
+        {
+            bool authenticated = false;
+            HttpResponseMessage response = await RestClient.PostJsonAsync("http://10.0.2.2:5000/api/smartticket", new UserCredentials() { Username = username, Password = password });
+            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                string token = await response.Content.ReadAsStringAsync();
+                RestClient.SetOauthToken(token);
+                authenticated = true;
+            }            
+            return authenticated;
         }
 
         #region INotifyPropertyChanged

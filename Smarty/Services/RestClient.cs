@@ -32,29 +32,35 @@ namespace Smarty.Services
             _jwtToken = token;
         }
 
-        public string GetToken()
-        {
-            return _jwtToken;
-        }
-
         public Task<HttpResponseMessage> PostJsonAsync(string requestUrl, object bodyContent)
         {
-            StringContent content = new StringContent(JsonSerializer.Serialize(bodyContent));
+            string contentAsString = string.Empty;
+            if(bodyContent.GetType() != typeof(string))
+            {
+                contentAsString = JsonSerializer.Serialize(bodyContent);
+            }
+            StringContent content = new StringContent(contentAsString);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             return _httpClient.PostAsync(requestUrl, content);
         }
 
-        public async Task<HttpResponseMessage> Get(string requestUrl)
-        {
-            //_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _jwtToken);                        
-            var response_1 = await _httpClient.GetAsync(requestUrl);
-            var b = response_1.Content;
-            var httpClientHandler = new HttpClientHandler() { };
-            HttpClient client = new HttpClient(httpClientHandler);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _jwtToken);
-            var response = await client.GetAsync(requestUrl);
-            var a = response.Content;
+        public async Task<HttpResponseMessage> GetAsync(string requestUrl)
+        {            
+            HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+            Uri finalRequestUri = response.RequestMessage.RequestUri;
+            if (finalRequestUri != new Uri(requestUrl))
+            {
+                if (IsHostTrusted(finalRequestUri))
+                {
+                    response = _httpClient.GetAsync(finalRequestUri).Result;
+                }
+            }
             return response;
+        }
+
+        private bool IsHostTrusted(Uri uri)
+        {
+            return uri.Host == "10.0.2.2";
         }
     }
 }
