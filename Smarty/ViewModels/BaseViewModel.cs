@@ -44,7 +44,7 @@ namespace Smarty.ViewModels
         protected async Task<bool> AuthenticateUser(string username, string password)
         {
             bool authenticated = false;
-            HttpResponseMessage response = await RestClient.PostJsonAsync("http://10.0.2.2:5000/api/smartticket", new UserCredentials() { Username = username, Password = password });
+            HttpResponseMessage response = await RestClient.PostJsonAsync("http://10.0.2.2:5000/api/smartticket/authenticate", new UserCredentials() { Username = username, Password = password });
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 string token = await response.Content.ReadAsStringAsync();

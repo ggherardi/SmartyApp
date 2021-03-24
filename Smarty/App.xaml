@@ -7,8 +7,15 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#910023</Color>
-            <Color x:Key="Secondary">#BEA469</Color>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="roboto"></Setter>
+            </Style>
+            <Color x:Key="Primary">#E78068</Color>
+            <Color x:Key="Secondary">#24262C</Color>
+            <!-- Buttons -->
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="20"></Setter>
+            </Style>
             <Style TargetType="Button" Class="btn-primary">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
