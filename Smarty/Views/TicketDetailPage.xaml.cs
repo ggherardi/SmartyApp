@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Smarty.Views
 {
-    public partial class UnderConstructionPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class TicketDetailPage : ContentPage
     {
-        public UnderConstructionPage()
+        public TicketDetailPage()
         {
             InitializeComponent();
-            this.BindingContext = new UnderConstructionViewModel();
+            this.BindingContext = new TicketDetailViewModel();
         }
     }
 }

@@ -17,4 +17,10 @@ namespace Smarty.Models
         public string Name { get; set; }
         public string Surname { get; set; }
     }
+
+    public class CreditRecharge
+    {
+        public string TicketId { get; set; }
+        public decimal Amount { get; set; }
+    }
 }

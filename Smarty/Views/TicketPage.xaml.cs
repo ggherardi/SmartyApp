@@ -1,4 +1,5 @@
-﻿using Smarty.ViewModels;
+﻿using Smarty.Models;
+using Smarty.ViewModels;
 using System;
 using System.ComponentModel;
 using Xamarin.Forms;
@@ -8,10 +9,20 @@ namespace Smarty.Views
 {
     public partial class TicketPage : ContentPage
     {
+        TicketViewModel _viewModel;
+
         public TicketPage()
         {
             InitializeComponent();
-            this.BindingContext = new TicketViewModel();        
+            TicketViewModel viewModel = new TicketViewModel();
+            this.BindingContext = viewModel;
+            _viewModel = viewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _viewModel.OnAppearing();
         }
     }
 }

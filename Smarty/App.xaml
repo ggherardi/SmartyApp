@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="roboto"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
             </Style>
             <Color x:Key="Primary">#E78068</Color>
             <Color x:Key="Secondary">#5C6982</Color>

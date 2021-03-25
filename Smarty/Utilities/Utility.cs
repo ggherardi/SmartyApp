@@ -10,32 +10,6 @@ using Xamarin.Forms;
 
 namespace Smarty.Utilities
 {
-    public class NegateBooleanConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return !(bool)value;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return !(bool)value;
-        }
-    }
-
-    public class DoubleToEuroStringConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return $"{(decimal)value:N2} €";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return $"{(decimal)value:N2} €";
-        }
-    }
-
     public class Utility
     {
         public async static Task<T> DeserializeObjectFromHttpResponse<T>(HttpResponseMessage response) where T : new()
@@ -51,6 +25,17 @@ namespace Smarty.Utilities
                 }
             }
             return deserializedObject;
+        }
+
+        public static byte[] ConvertToByteArray(string hexString)
+        {
+            string[] hexArray = hexString.Split('-');
+            byte[] byteArray = new byte[hexArray.Length];
+            for (int i = 0; i < hexArray.Length; i++)
+            {
+                byteArray[i] = Convert.ToByte(hexArray[i], 16);
+            }
+            return byteArray;
         }
     }
 }

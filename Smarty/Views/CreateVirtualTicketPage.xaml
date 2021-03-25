@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Smarty.Views.CreateVirtualTicketPage"
+             Title="Crea biglietto virtuale"
+             BackgroundColor="{StaticResource Secondary}">
+    <ContentPage.Content>
+        <StackLayout Padding="20, 20, 20, 20" Margin="0, 20, 0, 0">
+            <Label FontSize="18">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Premendo sul seguente pulsante verrà creato un biglietto virtuale che verrà automaticamente associato al tuo account. "></Span>
+                        <Span Text="Attualmente il limite massimo di biglietti virtuali è 1, pertanto per creare un nuovo biglietto in futuro sarà necessario cancellare il biglietto virtuale già posseduto."></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Button Text="Crea biglietto virtuale" Command="{Binding CreateVirtualTicketCommand}" class="btn-primary" Margin="0, 20, 0, 0"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

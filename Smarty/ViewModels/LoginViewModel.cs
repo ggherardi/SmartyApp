@@ -9,8 +9,8 @@ namespace Smarty.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private string _username;
-        private string _password;
+        private string _username = "ggherardi";
+        private string _password = "gg";
         private bool _isLoginButtonVisibile = true;
         public string Username { get => _username; set => SetProperty(ref _username, value); }
         public string Password { get => _password; set => SetProperty(ref _password, value); }

@@ -1,4 +1,5 @@
-﻿using Smarty.Services;
+﻿using Smarty.Models;
+using Smarty.Services;
 using Smarty.Views;
 using System;
 using System.Net.Http;
@@ -14,8 +15,8 @@ namespace Smarty
         public App()
         {
             InitializeComponent();
-            
-            // Dependency Injection
+
+            DependencyService.RegisterSingleton(new DataStore<SmartTicket>());
             DependencyService.RegisterSingleton(new RestClient());
 
             MainPage = new AppShell();

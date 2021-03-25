@@ -33,6 +33,11 @@ namespace Smarty.Services
             _jwtToken = token;
         }
 
+        public Task<HttpResponseMessage> PostEmptyAsync(string requestUrl)
+        {           
+            return _httpClient.PostAsync(requestUrl, null);
+        }
+
         public Task<HttpResponseMessage> PostJsonAsync(string requestUrl, object bodyContent)
         {
             string contentAsString = string.Empty;
@@ -61,6 +66,7 @@ namespace Smarty.Services
 
         private bool IsHostTrusted(Uri uri)
         {
+            //Debug host
             return uri.Host == "10.0.2.2";
         }
     }
