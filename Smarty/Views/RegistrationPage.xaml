@@ -1,10 +1,45 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Smarty.Views.RegistrationPage">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
-</ContentView>
+             x:Class="Smarty.Views.RegistrationPage"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             xmlns:validation="clr-namespace:Smarty.Validation"
+             xmlns:utilities="clr-namespace:Smarty.Utilities"    
+             xmlns:controls="clr-namespace:Smarty.Controls"                          
+             BackgroundImageSource="colosseum_blur.png"
+             Title="Registrazione">
+    <ContentPage.Resources>
+        <utilities:NegateBooleanConverter x:Key="negate"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Fill">
+            <StackLayout Padding="10,0,10,0" Margin="0,100,0,0" VerticalOptions="CenterAndExpand">
+                <Frame BackgroundColor="Transparent">
+                    <StackLayout>
+                        <Label Text="Inserisci i tuoi dati" HorizontalTextAlignment="Center" FontSize="Large" Padding="30,24,30,24" TextColor="White"></Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                                <ColumnDefinition Width="80*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Username" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White"></Label>
+                            <controls:WhiteEntry Grid.Row="0" IsPassword="False" Grid.Column="1" Text="{Binding Username}" TextColor="White" validation:IsNotNullOrEmptyValidationBehavior.AttachBehavior="True"></controls:WhiteEntry>
+                            <Entry>
+                                <Entry.Behaviors></Entry.Behaviors></Entry>
+                            <Label Text="Password" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White"></Label>
+                            <controls:WhiteEntry Grid.Row="1" IsPassword="True" Grid.Column="1" Text="{Binding Password}" TextColor="White"></controls:WhiteEntry>
+                            <Label Text="Email" Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White"></Label>
+                            <controls:WhiteEntry Grid.Row="2" Grid.Column="1" Text="{Binding Email}" TextColor="White" Keyboard="Email"></controls:WhiteEntry>
+                            <Label Text="Nome" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White"></Label>
+                            <controls:WhiteEntry Grid.Row="3" Grid.Column="1" Text="{Binding Name}" TextColor="White"></controls:WhiteEntry>
+                            <Label Text="Cognome" Grid.Row="4" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White"></Label>
+                            <controls:WhiteEntry Grid.Row="4" Grid.Column="1" Text="{Binding Surname}" TextColor="White"></controls:WhiteEntry>
+                        </Grid>
+                        <ActivityIndicator x:Name="loaderLogin" IsRunning="true" IsVisible="{Binding IsRegistrationButtonVisibile, Converter={StaticResource negate}}" />
+                        <Button class="btn-primary" Margin="0,30,0,0" VerticalOptions="Center" Text="Registrati" IsVisible="{Binding IsRegistrationButtonVisibile}" Command="{Binding RegisterCommand}"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

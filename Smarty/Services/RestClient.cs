@@ -19,7 +19,7 @@ namespace Smarty.Services
             httpClientHandler.ServerCertificateCustomValidationCallback =
             (message, cert, chain, errors) => { return true; };
             _httpClient = new HttpClient(httpClientHandler);
-            _httpClient.Timeout = new TimeSpan(0, 0, 5);
+            _httpClient.Timeout = new TimeSpan(0, 0, 30);
         }
 
         public HttpClient GetClient()

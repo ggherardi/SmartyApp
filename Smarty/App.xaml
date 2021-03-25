@@ -11,7 +11,7 @@
                 <Setter Property="FontFamily" Value="roboto"></Setter>
             </Style>
             <Color x:Key="Primary">#E78068</Color>
-            <Color x:Key="Secondary">#24262C</Color>
+            <Color x:Key="Secondary">#5C6982</Color>
             <!-- Buttons -->
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="20"></Setter>

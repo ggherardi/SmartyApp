@@ -32,7 +32,7 @@ namespace Smarty.Droid.Renderers
             {
                 return;
             }
-            Control.BackgroundTintList = ColorStateList.ValueOf(Android.Graphics.Color.White);
+            Control.BackgroundTintList = ColorStateList.ValueOf(Android.Graphics.Color.White);            
             //Control.Background.SetColorFilter(Android.Graphics.Color.White, PorterDuff.Mode.SrcAtop);
         }
     }

@@ -41,10 +41,21 @@ namespace Smarty.ViewModels
             return true;
         }
 
-        protected async Task<bool> AuthenticateUser(string username, string password)
+        protected async Task<bool> RegisterUser(UserRegistration registration)
         {
             bool authenticated = false;
-            HttpResponseMessage response = await RestClient.PostJsonAsync("http://10.0.2.2:5000/api/smartticket/authenticate", new UserCredentials() { Username = username, Password = password });
+            HttpResponseMessage response = await RestClient.PostJsonAsync("http://10.0.2.2:5000/api/smartticket/register", registration);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                authenticated = await AuthenticateUser(registration.Credentials);
+            }
+            return authenticated;
+        }
+
+        protected async Task<bool> AuthenticateUser(UserCredentials credentials)
+        {
+            bool authenticated = false;
+            HttpResponseMessage response = await RestClient.PostJsonAsync("http://10.0.2.2:5000/api/smartticket/authenticate", credentials);
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 string token = await response.Content.ReadAsStringAsync();
