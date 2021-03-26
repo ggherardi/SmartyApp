@@ -15,7 +15,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>        
         <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Fill">
-            <ContentView BackgroundColor="{StaticResource Secondary}">
+            <ContentView BackgroundColor="{StaticResource Primary}">
                 <Label Text="Benvenuto su Smarty!" HorizontalTextAlignment="Center" FontSize="30" Padding="30,24,30,24" TextColor="White"></Label>
             </ContentView>
             <StackLayout Padding="10,0,10,0" Margin="0,100,0,0" VerticalOptions="CenterAndExpand">

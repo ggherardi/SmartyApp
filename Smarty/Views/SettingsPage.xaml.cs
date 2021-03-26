@@ -11,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace Smarty.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AssociatePhysicalTicketPage : ContentPage
+    public partial class SettingsPage : ContentPage
     {
-        public AssociatePhysicalTicketPage()
+        public SettingsPage()
         {
             InitializeComponent();
-            this.BindingContext = new AssociatePhysicalTicketViewModel();
+            this.BindingContext = new SettingsViewModel();
         }
     }
 }

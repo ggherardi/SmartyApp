@@ -33,18 +33,22 @@ namespace Smarty.Services
             _jwtToken = token;
         }
 
-        public Task<HttpResponseMessage> PostEmptyAsync(string requestUrl)
+        public Task<HttpResponseMessage> PostAsync(string requestUrl)
         {           
             return _httpClient.PostAsync(requestUrl, null);
         }
 
+        public Task<HttpResponseMessage> PostAsync(string requestUrl, string content)
+        {
+            StringContent stringContent = new StringContent(content);
+            stringContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            return _httpClient.PostAsync(requestUrl, stringContent);
+        }
+
         public Task<HttpResponseMessage> PostJsonAsync(string requestUrl, object bodyContent)
         {
-            string contentAsString = string.Empty;
-            if(bodyContent.GetType() != typeof(string))
-            {
-                contentAsString = JsonSerializer.Serialize(bodyContent);
-            }
+            string contentAsString = string.Empty; 
+            contentAsString = JsonSerializer.Serialize(bodyContent);
             StringContent content = new StringContent(contentAsString);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             return _httpClient.PostAsync(requestUrl, content);

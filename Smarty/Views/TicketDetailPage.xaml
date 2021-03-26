@@ -54,6 +54,7 @@
                 </Grid>
             </StackLayout>
             <Button Text="Ricarica biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding AddCreditCommand}" class="btn-primary"></Button>
+            <Button Text="Cancella biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding DeleteTicketCommand}" class="btn-secondary" TextColor="{StaticResource Primary}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

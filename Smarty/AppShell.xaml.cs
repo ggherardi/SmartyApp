@@ -15,7 +15,7 @@ namespace Smarty
             Routing.RegisterRoute(nameof(TicketDetailPage), typeof(TicketDetailPage));
             Routing.RegisterRoute(nameof(AddCreditPage), typeof(AddCreditPage));
             Routing.RegisterRoute(nameof(CreateVirtualTicketPage), typeof(CreateVirtualTicketPage));
-            Routing.RegisterRoute(nameof(AssociatePhysicalTicketPage), typeof(AssociatePhysicalTicketPage));
+            Routing.RegisterRoute(nameof(BindPhysicalTicketPage), typeof(BindPhysicalTicketPage));
         }
 
     }

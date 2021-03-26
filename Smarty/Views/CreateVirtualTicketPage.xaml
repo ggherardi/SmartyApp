@@ -9,8 +9,8 @@
             <Label FontSize="18">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Premendo sul seguente pulsante verrà creato un biglietto virtuale che verrà automaticamente associato al tuo account. "></Span>
-                        <Span Text="Attualmente il limite massimo di biglietti virtuali è 1, pertanto per creare un nuovo biglietto in futuro sarà necessario cancellare il biglietto virtuale già posseduto."></Span>
+                        <Span Text="Premendo sul pulsante sottostante verrà creato un biglietto virtuale che verrà automaticamente associato al tuo account. "></Span>
+                        <Span Text="&#10;&#10;Attualmente il limite massimo di biglietti virtuali è 1, pertanto per creare un nuovo biglietto in futuro sarà necessario cancellare il biglietto virtuale già posseduto."></Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

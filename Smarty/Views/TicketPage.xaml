@@ -69,8 +69,8 @@
             </RefreshView>
         </Grid>
         <StackLayout Margin="0, 0, 0, 20">
-            <Button Text="Associa biglietto fisico" IsVisible="{Binding CanAssociateTicket}" Command="{Binding GoToAssociatePhysicalTicketCommand}" class="btn-primary"></Button>
-            <Button Text="Crea biglietto virtuale" IsVisible="{Binding CanAddVirtualCard}" class="btn-primary" Command="{Binding GoToCreateVirtualTicketCommand}" HorizontalOptions="Center" VerticalOptions="Center"></Button>
+            <Button Text="Associa biglietto fisico" IsVisible="{Binding CanAssociateTicket}" Command="{Binding GoToAssociatePhysicalTicketCommand}" HorizontalOptions="Center" VerticalOptions="Center" class="btn-primary" WidthRequest="300"></Button>
+            <Button Text="Crea biglietto virtuale" IsVisible="{Binding CanAddVirtualCard}" class="btn-primary" Command="{Binding GoToCreateVirtualTicketCommand}" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300"></Button>
         </StackLayout>
     </StackLayout>
 </ContentPage>

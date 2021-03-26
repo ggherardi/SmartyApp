@@ -26,7 +26,7 @@ namespace Smarty.ViewModels
         public bool CanAssociateTicket { get => _canAssociateTicket; set => SetProperty(ref _canAssociateTicket, value); }
         public Command GetTickets => new Command(GetTicketsAsync);
         public Command<SmartTicket> ItemTapped => new Command<SmartTicket>(OnItemSelected);
-        public Command GoToAssociatePhysicalTicketCommand => new Command(async () => await Shell.Current.GoToAsync($"{nameof(AssociatePhysicalTicketPage)}"));
+        public Command GoToAssociatePhysicalTicketCommand => new Command(async () => await Shell.Current.GoToAsync($"{nameof(BindPhysicalTicketPage)}"));
         public Command GoToCreateVirtualTicketCommand => new Command(async () => await Shell.Current.GoToAsync($"{nameof(CreateVirtualTicketPage)}"));
 
         public TicketViewModel()

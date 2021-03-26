@@ -12,10 +12,13 @@
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
             <Color x:Key="Primary">#E78068</Color>
-            <Color x:Key="Secondary">#5C6982</Color>
+            <Color x:Key="Secondary">#112840</Color>
+            <!--<Color x:Key="Secondary">#E78068</Color>
+            <Color x:Key="Primary">#2d4054</Color>-->
             <!-- Buttons -->
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="TextTransform" Value="None"></Setter>
             </Style>
             <Style TargetType="Button" Class="btn-primary">
                 <Setter Property="TextColor" Value="White"></Setter>
