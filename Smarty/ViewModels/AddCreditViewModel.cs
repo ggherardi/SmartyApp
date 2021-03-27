@@ -22,11 +22,15 @@ namespace Smarty.ViewModels
         private async void AddCredit()
         {
             HttpResponseMessage response = await RestClient.PostJsonAsync("https://10.0.2.2:5001/api/smartticket/addcredit", new CreditRecharge() { TicketId = _ticketId, Amount = Amount });
-            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            if(response.IsSuccessStatusCode)
             {
                 await Application.Current.MainPage.DisplayAlert("Operazione completata", $"Hai aggiunto {Amount}€ al credito del tuo biglietto virtuale {_ticketId}", "Ok");
                 await Xamarin.Essentials.SecureStorage.SetAsync("VirtualTicket", response.Content.ReadAsStringAsync().Result);
                 await Shell.Current.GoToAsync($"//{nameof(TicketPage)}");
+            }
+            else
+            {
+                DisplayHttpErrorMessage(response);
             }
         }
     }

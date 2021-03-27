@@ -45,16 +45,22 @@ namespace Smarty.ViewModels
             try
             {
                 HttpResponseMessage response = await RestClient.GetAsync("https://10.0.2.2:5001/api/smartticket/gettickets");
-                List<SmartTicket> ticketsList = await Utility.DeserializeObjectFromHttpResponse<List<SmartTicket>>(response);
-                await TicketStore.ClearAsync();
-                foreach (SmartTicket ticket in ticketsList)
+                if (response.IsSuccessStatusCode)
                 {
-                    await TicketStore.AddItemAsync(ticket);
+                    List<SmartTicket> ticketsList = await Utility.DeserializeObjectFromHttpResponse<List<SmartTicket>>(response);
+                    await TicketStore.ClearAsync();
+                    foreach (SmartTicket ticket in ticketsList)
+                    {
+                        await TicketStore.AddItemAsync(ticket);
+                    }
+                    Tickets = new ObservableCollection<SmartTicket>(TicketStore.GetItemsAsync().Result);
+                    CanAddVirtualCard = !TicketStore.GetItemsAsync().Result.ToList().Any(t => t.Virtual);
+                    CanAssociateTicket = !TicketStore.GetItemsAsync().Result.ToList().Any(t => !t.Virtual);
                 }
-                Tickets = new ObservableCollection<SmartTicket>(TicketStore.GetItemsAsync().Result);
-                CanAddVirtualCard = !TicketStore.GetItemsAsync().Result.ToList().Any(t => t.Virtual);
-                CanAssociateTicket = !TicketStore.GetItemsAsync().Result.ToList().Any(t => !t.Virtual);
-
+                else
+                {
+                    DisplayHttpErrorMessage(response);
+                }                
             }
             catch (Exception ex)
             {

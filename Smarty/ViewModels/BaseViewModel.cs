@@ -66,6 +66,12 @@ namespace Smarty.ViewModels
             return authenticated;
         }
 
+        protected async void DisplayHttpErrorMessage(HttpResponseMessage response)
+        {
+            string errorResponse = await response.Content.ReadAsStringAsync();
+            await Application.Current.MainPage.DisplayAlert("Errore", errorResponse, "Ok");
+        }
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")

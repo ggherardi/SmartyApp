@@ -18,10 +18,14 @@ namespace Smarty.ViewModels
             if (confirm)
             {
                 HttpResponseMessage response = await RestClient.PostJsonAsync("https://10.0.2.2:5001/api/smartticket/associateticket", _sampleTickedId);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                if (response.IsSuccessStatusCode)
                 {
                     await Application.Current.MainPage.DisplayAlert("Successo", $"Il biglietto {_sampleTickedId} è stato correttamente associato al tuo account", "Ok");
                     await Shell.Current.GoToAsync($"//{nameof(TicketPage)}");
+                }
+                else
+                {
+                    DisplayHttpErrorMessage(response);
                 }
             }
         }

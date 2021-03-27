@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+// Need to define this library external so I can use it across projects
 namespace Smarty.Models
 {
     public class UserCredentials
@@ -22,5 +23,11 @@ namespace Smarty.Models
     {
         public string TicketId { get; set; }
         public decimal Amount { get; set; }
+    }
+
+    public class ValidationRegistration
+    {
+        public string TicketId { get; set; }
+        public string Location { get; set; }
     }
 }

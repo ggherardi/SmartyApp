@@ -6,55 +6,76 @@
              x:Class="Smarty.Views.TicketDetailPage"
              BackgroundColor="{StaticResource Secondary}">
     <ContentPage.Resources>
+        <utilities:NegateBooleanConverter x:Key="negate"/>
         <utilities:NullDecimalToZeroConverter x:Key="decimal"/>
         <utilities:DateTimeValidationDefaultValueConverter x:Key="datetimedefault" />
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Padding="20, 20, 20, 20" Margin="0, 20, 0, 0">
-            <Image Grid.Row="0" Grid.Column="0" Scale="2">
-                <Image.Source>
-                    <FontImageSource FontFamily="fa" Color="White" Glyph="{Binding SelectedTicket.Icon}"/>
-                </Image.Source>
-            </Image>
-            <Label Text="{Binding SelectedTicket.Category}" FontSize="Large" HorizontalOptions="Center" Margin="0, 30, 0, 0"></Label>           
-            <StackLayout Grid.Row="0" Grid.Column="1" Padding="10, 20, 10, 20">
+        <StackLayout Padding="20, 20, 20, 5" Margin="0, 20, 0, 0">
+            <ScrollView>
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="70*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Scale="1" Margin="0, 20, 0, 0">
+                            <Image.Source>
+                                <FontImageSource FontFamily="fa" Color="White" Glyph="{Binding SelectedTicket.Icon}"/>
+                            </Image.Source>
+                        </Image>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding SelectedTicket.Category}" FontSize="Large" HorizontalOptions="Start"  Margin="0, 20, 0, 0"></Label>
+                    </Grid>
+                    <StackLayout Padding="10, 20, 10, 20">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*"></ColumnDefinition>
+                                <ColumnDefinition Width="65*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="Numero biglietto:" Grid.Row="1" Grid.Column="0"></Label>
+                            <Label Text="{Binding SelectedTicket.CardId}" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" FontSize="14" />
+
+                            <Label Text="Tipologia biglietto:" Grid.Row="2" Grid.Column="0"></Label>
+                            <Label Text="{Binding SelectedTicket.TicketType}" Grid.Row="2" Grid.Column="1" LineBreakMode="NoWrap" FontSize="14" />
+
+                            <Label Text="Credito:" Grid.Row="3" Grid.Column="0"></Label>
+                            <Label Text="{Binding SelectedTicket.Credit, StringFormat='{0:F2} €'}" Grid.Row="3" Grid.Column="1" LineBreakMode="NoWrap" FontSize="14" />
+
+                            <Label Text="Validazione:" Grid.Row="4" Grid.Column="0"></Label>
+                            <Label Text="{Binding SelectedTicket.CurrentValidation, Converter={StaticResource datetimedefault}}" Grid.Row="4" Grid.Column="1" LineBreakMode="NoWrap" FontSize="14" />
+
+                            <Label Text="Prima Validazione:" Grid.Row="5" Grid.Column="0"></Label>
+                            <Label Text="{Binding SelectedTicket.SessionValidation, Converter={StaticResource datetimedefault}}" Grid.Row="5" Grid.Column="1" LineBreakMode="NoWrap" FontSize="14" />
+
+                            <Label Text="Spesa da prima Validazione:" Grid.Row="6" Grid.Column="0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Spesa da"></Span>
+                                        <Span Text="&#10;prima validazione"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label Text="{Binding SelectedTicket.SessionExpense, StringFormat='{0:F2} €', Converter={StaticResource decimal}}" Grid.Row="6" Grid.Column="1" LineBreakMode="CharacterWrap" FontSize="14" />
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Padding="0, 10, 0, 0">
+                <Button Text="Rimuovi biglietto" IsVisible="{Binding SelectedTicket.Virtual, Converter={StaticResource negate}}" Command="{Binding UnbindTicketCommand}" class="btn-primary"></Button>
+                <Button Text="Valida biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding ValidateTicketCommand}" class="btn-primary"></Button>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10"></RowDefinition>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="35*"></ColumnDefinition>
-                        <ColumnDefinition Width="65*"></ColumnDefinition>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-
-                    <Label Text="Numero biglietto:" Grid.Row="1" Grid.Column="0"></Label>
-                    <Label Text="{Binding SelectedTicket.CardId}" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" FontSize="14" />
-                    
-                    <Label Text="Tipologia biglietto:" Grid.Row="2" Grid.Column="0"></Label>
-                    <Label Text="{Binding SelectedTicket.TicketType}" Grid.Row="2" Grid.Column="1" LineBreakMode="NoWrap" FontSize="14" />
-
-                    <Label Text="Credito:" Grid.Row="3" Grid.Column="0"></Label>
-                    <Label Text="{Binding SelectedTicket.Credit, StringFormat='{0:F2} €'}" Grid.Row="3" Grid.Column="1" LineBreakMode="NoWrap" FontSize="14" />
-
-                    <Label Text="Validazione:" Grid.Row="4" Grid.Column="0"></Label>
-                    <Label Text="{Binding SelectedTicket.CurrentValidation, Converter={StaticResource datetimedefault}}" Grid.Row="4" Grid.Column="1" LineBreakMode="NoWrap" FontSize="14" />
-                    
-                    <Label Text="Prima Validazione:" Grid.Row="5" Grid.Column="0"></Label>
-                    <Label Text="{Binding SelectedTicket.SessionValidation, Converter={StaticResource datetimedefault}}" Grid.Row="5" Grid.Column="1" LineBreakMode="NoWrap" FontSize="14" />
-
-                    <Label Text="Spesa da prima Validazione:" Grid.Row="6" Grid.Column="0">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Spesa da"></Span>
-                                <Span Text="&#10;prima validazione"></Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label Text="{Binding SelectedTicket.SessionExpense, StringFormat='{0:F2} €', Converter={StaticResource decimal}}" Grid.Row="6" Grid.Column="1" LineBreakMode="CharacterWrap" FontSize="14" />
+                    <Button Grid.Row="0" Grid.Column="0" Text="Ricarica biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding AddCreditCommand}" class="btn-secondary" TextColor="{StaticResource Primary}"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Text="Cancella biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding DeleteTicketCommand}" class="btn-secondary" TextColor="{StaticResource Primary}"></Button>
                 </Grid>
             </StackLayout>
-            <Button Text="Ricarica biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding AddCreditCommand}" class="btn-primary"></Button>
-            <Button Text="Cancella biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding DeleteTicketCommand}" class="btn-secondary" TextColor="{StaticResource Primary}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

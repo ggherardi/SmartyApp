@@ -21,8 +21,15 @@ namespace Smarty.ViewModels
             if (confirm)
             {
                 HttpResponseMessage response = await RestClient.PostAsync("https://10.0.2.2:5001/api/smartticket/createvirtualticket");
-                await Xamarin.Essentials.SecureStorage.SetAsync("VirtualTicket", response.Content.ReadAsStringAsync().Result);
-                await Shell.Current.GoToAsync($"//{nameof(TicketPage)}");
+                if (response.IsSuccessStatusCode)
+                {
+                    await Xamarin.Essentials.SecureStorage.SetAsync("VirtualTicket", response.Content.ReadAsStringAsync().Result);
+                    await Shell.Current.GoToAsync($"//{nameof(TicketPage)}");
+                }
+                else
+                {
+                    DisplayHttpErrorMessage(response);
+                }
             }            
         }
     }
