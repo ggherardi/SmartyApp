@@ -24,8 +24,6 @@
                             </Grid.ColumnDefinitions>
                             <Label Text="Username" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White"></Label>
                             <controls:WhiteEntry Grid.Row="0" IsPassword="False" Grid.Column="1" Text="{Binding Username}" TextColor="White" validation:IsNotNullOrEmptyValidationBehavior.AttachBehavior="True"></controls:WhiteEntry>
-                            <Entry>
-                                <Entry.Behaviors></Entry.Behaviors></Entry>
                             <Label Text="Password" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White"></Label>
                             <controls:WhiteEntry Grid.Row="1" IsPassword="True" Grid.Column="1" Text="{Binding Password}" TextColor="White"></controls:WhiteEntry>
                             <Label Text="Email" Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White"></Label>

@@ -23,6 +23,11 @@
             </Grid.RowDefinitions>
             <RefreshView Grid.Row="0" Command="{Binding GetTickets}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                 <CollectionView x:Name="ItemsListView" ItemsSource="{Binding Tickets}" SelectionMode="Single">
+                    <CollectionView.EmptyView>
+                        <StackLayout HorizontalOptions="CenterAndExpand" Spacing="15" VerticalOptions="Start">
+                            <Label HorizontalTextAlignment="Center" Text="Nessun biglietto trovato" Padding="20" />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
