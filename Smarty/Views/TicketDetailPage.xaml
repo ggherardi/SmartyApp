@@ -4,7 +4,9 @@
              xmlns:vm="clr-namespace:Smarty.ViewModels"
              xmlns:utilities="clr-namespace:Smarty.Utilities"    
              x:Class="Smarty.Views.TicketDetailPage"
-             BackgroundColor="{StaticResource Secondary}">
+             BackgroundColor="{StaticResource Secondary}"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             Title="Dettaglio biglietto">
     <ContentPage.Resources>
         <utilities:NegateBooleanConverter x:Key="negate"/>
         <utilities:NullDecimalToZeroConverter x:Key="decimal"/>
@@ -66,15 +68,31 @@
             </ScrollView>
             <StackLayout Padding="0, 10, 0, 0">
                 <Button Text="Rimuovi biglietto" IsVisible="{Binding SelectedTicket.Virtual, Converter={StaticResource negate}}" Command="{Binding UnbindTicketCommand}" class="btn-primary"></Button>
-                <Button Text="Valida biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding ValidateTicketCommand}" class="btn-primary"></Button>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50*"></ColumnDefinition>
-                        <ColumnDefinition Width="50*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" Text="Ricarica biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding AddCreditCommand}" class="btn-secondary" TextColor="{StaticResource Primary}"></Button>
-                    <Button Grid.Row="0" Grid.Column="1" Text="Cancella biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding DeleteTicketCommand}" class="btn-secondary" TextColor="{StaticResource Primary}"></Button>
-                </Grid>
+                <StackLayout IsVisible="{Binding SelectedTicket.Virtual}">
+                    <Button Text="Valida biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding ValidateTicketCommand}" class="btn-primary"></Button>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="45*"></ColumnDefinition>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="45*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Scale="2">
+                            <Image.Source>
+                                <FontImageSource FontFamily="fa" Color="{StaticResource Primary}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShoppingCart}"/>
+                            </Image.Source>
+                        </Image>
+                        <Button Grid.Row="0" Grid.Column="1" Text="Ricarica biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding AddCreditCommand}" class="btn-secondary" TextColor="{StaticResource Primary}"></Button>
+                        <Label Grid.Row="0" Grid.Column="2" Padding="5"></Label>
+                        <Image Grid.Row="0" Grid.Column="3" Scale="2">
+                            <Image.Source>
+                                <FontImageSource FontFamily="fa" Color="{StaticResource Primary}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.TrashAlt}"/>
+                            </Image.Source>
+                        </Image>
+                        <Button Grid.Row="0" Grid.Column="4" Text="Cancella biglietto" IsVisible="{Binding SelectedTicket.Virtual}" Command="{Binding DeleteTicketCommand}" class="btn-secondary" TextColor="{StaticResource Primary}"></Button>
+                    </Grid>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
