@@ -12,6 +12,7 @@ namespace Smarty.Services
         Task<HttpResponseMessage> PostAsync(string requestUrl);
         Task<HttpResponseMessage> PostAsync(string requestUrl, string content);
         Task<HttpResponseMessage> PostJsonAsync(string requestUrl, object bodyContent);
+        Task<HttpResponseMessage> DeleteAsync(string requestUrl);
         Task<HttpResponseMessage> GetAsync(string requestUrl);
         void SetOauthToken(string token);        
     }

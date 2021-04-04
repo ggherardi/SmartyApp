@@ -47,11 +47,15 @@ namespace Smarty.Services
 
         public Task<HttpResponseMessage> PostJsonAsync(string requestUrl, object bodyContent)
         {
-            string contentAsString = string.Empty; 
-            contentAsString = JsonSerializer.Serialize(bodyContent);
+            string contentAsString = JsonSerializer.Serialize(bodyContent);
             StringContent content = new StringContent(contentAsString);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             return _httpClient.PostAsync(requestUrl, content);
+        }
+
+        public Task<HttpResponseMessage> DeleteAsync(string requestUrl)
+        {
+            return _httpClient.DeleteAsync(requestUrl);
         }
 
         public async Task<HttpResponseMessage> GetAsync(string requestUrl)

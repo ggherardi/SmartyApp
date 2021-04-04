@@ -71,7 +71,7 @@ namespace Smarty.ViewModels
             bool confirmDelete = await Application.Current.MainPage.DisplayAlert("Conferma cancellazione", @"Proseguendo con la cancellazione, eliminerai permanentemente questo biglietto virtuale. Eventuale credito rimanente verrà cancellato assieme al biglietto.", "Conferma", "Annulla");
             if (confirmDelete)
             {
-                HttpResponseMessage response = await RestClient.PostJsonAsync("https://10.0.2.2:5001/api/smartticket/deleteticket", _ticketId);
+                HttpResponseMessage response = await RestClient.DeleteAsync($"https://10.0.2.2:5001/api/smartticket/deleteticket/{_ticketId}");
                 if(response.IsSuccessStatusCode)
                 {
                     await Application.Current.MainPage.DisplayAlert("Successo", "Il biglietto è stato correttamente rimosso dall'account.", "Ok");
